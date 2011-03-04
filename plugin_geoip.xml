@@ -1,0 +1,5 @@
+<configuration plugin="geoip">
+  <settings name="commands">
+    <set name="helloworld">2</set>
+  </settings>
+</configuration>
