@@ -1,5 +1,13 @@
 <configuration plugin="geoip">
-  <settings name="commands">
-    <set name="helloworld">2</set>
+
+  <settings name="settings">
+    <!-- set name="levels">0,1,2,20,40</set -->
+    <set name="geoip_dat">/usr/share/GeoIP/GeoLiteCity.dat</set>
   </settings>
+
+  <settings name="commands">
+    <set name="geoip">2</set>
+  </settings>
+
 </configuration>
+
