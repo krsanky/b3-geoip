@@ -1,5 +1,5 @@
 # GeoIP Plugin for BigBrotherBot(B3) (www.bigbrotherbot.net)
-# Copyright (C) 2010 Paul Wisehart
+# Copyright (C) 2011 Paul Wisehart
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -39,13 +39,11 @@ class GeoipPlugin(b3.plugin.Plugin):
             return False
 
         #get a geo obj.:
-        #gi = GeoIP.open("/usr/local/share/GeoIP/GeoIPCity.dat",GeoIP.GEOIP_STANDARD)
-        #gi = GeoIP.new(GeoIP.GEOIP_MEMORY_CACHE)
+        # GeoIP.GEOIP_STANDARD, GeoIP.GEOIP_MEMORY_CACHE
         self.geoip = GeoIP.open(self._geoip_dat, GeoIP.GEOIP_MEMORY_CACHE)
 
 
         # Register commands
-        # something needs help here:
         #def registerCommand(self, plugin, command, level, handler, alias=None, secretLevel=None):
         self._adminPlugin.registerCommand(self, 'geoip', 2, self.cmd_geoip, 'gi')
 
@@ -59,10 +57,6 @@ class GeoipPlugin(b3.plugin.Plugin):
     def onLoadConfig(self):
         """load our settings"""
         self.verbose('Loading config')
-        #self.config.get('settings', 'levels')
-        # <configuration plugin="tk">
-        # 	<settings name="settings">
-        # 		<set name="levels">0,1,2,20,40</set>
         self._geoip_dat = self.config.get('settings', 'geoip_dat')
 
     def onEvent(self, event):
