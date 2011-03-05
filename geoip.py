@@ -93,16 +93,20 @@ class GeoipPlugin(b3.plugin.Plugin):
         'time_zone': 'America/Chicago'}
         """
         r = self.geoip.record_by_addr(client.ip)
-        return r['region_name']
+        return r
 
     def cmd_geoip(self, data, client, cmd=None):
         """
-        given a player slot number, return the
-        country code of their ip
+        given a player, return the country code of their ip
         """
-        self.debug('data:%s' % data,)
-        #self.helloWorld(client)
-        client.console.say('hello: %s %s' % (client.ip, self._geoip_dat))
-        client.console.say('what?: %s' % self.get_geo_record(client))
+        data = data.strip()
+        #self.debug('data:%s' % data,)
+
+        sclient = self._adminPlugin.findClientPrompt(data, client=client)
+
+        if sclient:
+            geo = self.get_geo_record(sclient)
+            s = "%s: %s, %s, %s" % (sclient.name, geo['city'], geo['region_name'], geo['country_name'])
+            client.console.say(s)
 
         return
